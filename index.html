@@ -10,10 +10,22 @@
   </head>
   <body>
     <div class="py-5 bg-light">
-      <div class="container"></div>
+      <div class="container">
+        <select id="country_select" class="form-select" aria-label="Default select example">
+          <option selected>Filter by country</option>
+          <option value="United States">United States</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="Italy">Italy</option>
+          <option value="Japan">Japan</option>
+          <option value="China">China</option>
+          <option value="India">India</option>
+        </select>
+      </div>
     </div>
     <div class="container">
-      <ul id="investor_list" class="list-group list-group-flush"></ul>
+      <ul id="investor_list" class="list-group list-group-flush">
+        <img src="img/spinner.svg" alt="" width="24" height="24" />
+      </ul>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="vendors/bootstrap-5.3.3/js/bootstrap.bundle.min.js"></script>

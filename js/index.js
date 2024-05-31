@@ -1,21 +1,24 @@
 // Initialise Supabase client
 const client = supabase.createClient("https://xargcmjbcxmattsksdea.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhhcmdjbWpiY3htYXR0c2tzZGVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk4NTAzNzksImV4cCI6MjAyNTQyNjM3OX0.T47bweSbghclCg34gCc7-qFOSJML3k8MoQgvpqA1IXM");
 
+const country_select = document.getElementById("country_select");
+const investor_list = document.getElementById("investor_list");
+const default_content = `<img src="img/spinner.svg" alt="" width="24" height="24" />`;
+
 window.addEventListener("DOMContentLoaded", async (event) => {
   await getList();
 });
 
-async function getList() {
-  const { data, error } = await client.from("vcs").select("*");
-  if (data) {
-    let investor_list = document.getElementById("investor_list");
-    let content = "";
+async function drawData(data) {
+  investor_list.innerHTML = default_content;
+  let content = "";
 
-    data.forEach((vc) => {
-      let links = vc.links;
-      let investingSectors = "";
-      investingSectors = vc.investing_sectors.map((sector) => `<span class="badge rounded-pill text-bg-secondary">${sector}</span>`).join("");
-      content += `
+  data.forEach((vc) => {
+    let links = vc.links;
+    let investingSectors = "";
+    investingStage = vc.investing_stage.map((stage) => `<span class="badge rounded-pill text-bg-secondary">${stage}</span>`).join("");
+    investingSectors = vc.investing_sectors.map((sector) => `<span class="badge rounded-pill text-bg-secondary">${sector}</span>`).join("");
+    content += `
         <li class="list-group-item d-flex flex-wrap justify-content-between">
           <div class="d-flex flex-column col-md-3">
             <small class="font-monospace text-uppercase text-secondary">Fund name</small>
@@ -44,24 +47,46 @@ async function getList() {
                 }
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-2">
             <small class="font-monospace text-uppercase text-secondary">Fund location</small>
             <p class="m-0">${vc.fund_location}</p>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-2">
             <small class="font-monospace text-uppercase text-secondary">Fund type</small>
             <p class="m-0">${vc.fund_type}</p>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-2">
+            <small class="font-monospace text-uppercase text-secondary">Investing stage</small>
+            <p class="m-0">${investingStage}</p>
+          </div>
+          <div class="col-md-2">
             <small class="font-monospace text-uppercase text-secondary">Investing sector</small>
             <p class="m-0">${investingSectors}</p>
           </div>
         </li>
         `;
-    });
-    investor_list.innerHTML = content;
+  });
+  investor_list.innerHTML = content;
+}
+
+async function getList() {
+  const { data, error } = await client.from("vcs").select("*");
+  if (data) {
+    await drawData(data);
   }
   if (error) {
     console.log(error);
   }
 }
+
+country_select.addEventListener("change", async function () {
+  const { data, error } = await client.from("vcs").select().eq("fund_location", this.value);
+  if (data) {
+    await drawData(data);
+  }
+  if (error) {
+    console.log(error);
+  }
+  let value = this.value;
+  console.log(value);
+});

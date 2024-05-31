@@ -57,7 +57,7 @@ async function drawData(data) {
           </div>
           <div class="col-md-2">
             <small class="font-monospace text-uppercase text-secondary">Investing stage</small>
-            <p class="m-0">${investingStage}</p>
+            <p class="m-0">${investingStage == "" ? "-" : investingStage}</p>
           </div>
           <div class="col-md-2">
             <small class="font-monospace text-uppercase text-secondary">Investing sector</small>

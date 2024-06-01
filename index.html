@@ -27,6 +27,52 @@
         <img src="img/spinner.svg" alt="" width="24" height="24" />
       </ul>
     </div>
+
+    <!-- VC Modal -->
+    <div class="modal fade" id="vcModal" tabindex="-1" aria-labelledby="vcModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header align-items-start">
+            <div class="d-flex flex-row align-items-center">
+              <img id="modal_logo" class="border border-secondary-subtle rounded me-3" src="img/logo-placeholder.svg" width="48" height="48" alt="" />
+              <h1 class="modal-title fs-5" id="modal_vc_name">
+                <span class="placeholder col-8 placeholder-lg"></span>
+              </h1>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body pt-0">
+            <div id="modal_vc_links" class="d-flex flex-row mb-3">
+              <span class="placeholder col-1 me-2"></span>
+              <span class="placeholder col-1 me-2"></span>
+              <span class="placeholder col-1 me-2"></span>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <small class="font-monospace text-uppercase text-secondary">Fund type</small>
+                <p id="modal_fund_type" class="m-0">
+                  <span class="placeholder col-6"></span>
+                </p>
+              </div>
+              <div class="col-md-4">
+                <small class="font-monospace text-uppercase text-secondary">Fund location</small>
+                <p id="modal_fund_location" class="m-0">
+                  <span class="placeholder col-6"></span>
+                </p>
+              </div>
+            </div>
+            <small class="font-monospace text-uppercase text-secondary">Description</small>
+            <p id="modal_vc_description">
+              <span class="placeholder col-7"></span>
+              <span class="placeholder col-4"></span>
+              <span class="placeholder col-4"></span>
+              <span class="placeholder col-6"></span>
+              <span class="placeholder col-8"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="vendors/bootstrap-5.3.3/js/bootstrap.bundle.min.js"></script>
     <script src="js/index.js?v=1.0"></script>
